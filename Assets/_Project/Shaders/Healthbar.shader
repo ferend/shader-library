@@ -4,6 +4,8 @@ Shader "Unlit/Healthbar"
     {
         _MainTex ("Texture", 2D) = "white" {}
         _Health ("Health" , Range(0,1)) = 1
+        _BorderSize ("Border Size" , Range(0,0.5)) = 0.1
+
     }
     SubShader
     {
@@ -36,6 +38,7 @@ Shader "Unlit/Healthbar"
 
             sampler2D _MainTex;
             float _Health;
+            float _BorderSize;
 
             float InverseLerp(float a, float b, float v )
             {
@@ -59,6 +62,9 @@ Shader "Unlit/Healthbar"
                 float sdf = distance(coords, pointOnLineSeg) * 2 -1;
                 clip(-sdf);
                 
+                float borderSdf = sdf + _BorderSize;
+                float borderMask = step(0,-borderSdf);
+
                 float healthbarMask = _Health > i.uv.x;
                 
                 // clip(healthbarMask - 0.5); // Discarding unwanted fragments 
@@ -76,7 +82,7 @@ Shader "Unlit/Healthbar"
                     healtbarColor *= flash;
                 }
                 
-                return float4(healtbarColor,healthbarMask * 0.5); 
+                return float4(healtbarColor * borderMask * healthbarMask , 1); 
             }
             ENDCG
         }
