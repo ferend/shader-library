@@ -52,6 +52,13 @@ Shader "Unlit/Healthbar"
 
             float4 frag (Interpolators i) : SV_Target
             {
+                float2 coords = i.uv;
+                coords.x *= 8;
+
+                float2 pointOnLineSeg = float2( clamp(coords.x, 0.5,7.5)  , 0.5); // hardcoded midpoint on shape
+                float sdf = distance(coords, pointOnLineSeg) * 2 -1;
+                clip(-sdf);
+                
                 float healthbarMask = _Health > i.uv.x;
                 
                 // clip(healthbarMask - 0.5); // Discarding unwanted fragments 
