@@ -62,6 +62,13 @@ Shader "Unlit/Healthbar"
                 // float3 bgColor = float3(0,0,0);
                 // float3 outColor = lerp(bgColor,healtbarColor,healthbarMask);    // used without alphablending
                 // return float4(outColor,1);
+
+                float flash = cos(_Time.y * 4) * 0.4 + 1; // +1 for color saturation
+                if(_Health <= 0.2)
+                {
+                    healtbarColor *= flash;
+                }
+                
                 return float4(healtbarColor,healthbarMask * 0.5); 
             }
             ENDCG

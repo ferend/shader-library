@@ -20,7 +20,9 @@
         Pass
         {
             ZWrite off
-            Blend One One
+            Blend One One // Additive
+            //Blend DstColor Zero // Multiply
+            
             Cull off
             CGPROGRAM
             #pragma vertex vert
