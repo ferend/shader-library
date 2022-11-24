@@ -3,6 +3,8 @@ Shader "Unlit/ShaderWithLight"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Gloss("Gloss",Range(0,1)) = 1
+        _Color("Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -33,6 +35,8 @@ Shader "Unlit/ShaderWithLight"
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
+            float _Gloss;
+            float4 _Color;
 
             Interpolators vert (MeshData v)
             {
@@ -48,16 +52,30 @@ Shader "Unlit/ShaderWithLight"
             {
                 // Diffuse lighting
                 //Light vector 
-                float3 N = i.normal;
+                float3 N = normalize(i.normal) ;
                 float3 L = _WorldSpaceLightPos0.xyz; // a direction
-                float diffuseLight = saturate(dot(N,L)); // Lambertian light equation
+                float3 lambert = saturate(dot( N,L ));
+                //float diffuseLight = saturate(dot(N,L)); // Lambertian light equation
+                float diffuseLight = lambert * _LightColor0.xyz;  
                 //return float4(diffuseLight.xxx ,1);
 
                 // Specular lighting
-                float3 V = _WorldSpaceCameraPos - i.wPos;
-                float3 R = reflect(-L,N); // Reflection
-                float3 specularLight = saturate(dot(V,R));
-                return float4(specularLight.xxx ,1); // Dot product between the view vector and reflected light vector
+                float3 V = normalize(_WorldSpaceCameraPos - i.wPos);
+                //float3s R = reflect(-L,N); // Reflection
+                float3 H = normalize(L+V);
+                float3 specularLight = saturate(dot(H,N)) * (lambert >0);
+
+                float specularExponent = exp2(_Gloss * 11 ) + 2;
+                
+                specularLight = pow(specularLight, specularExponent) * _Gloss;
+                specularLight *= _LightColor0.xyz;
+
+                //Fresnel effect 
+                //float fresnel = 1 - dot(V,N); // Glowing effect
+                float fresnel = (1 - dot(V,N)) * (cos(_Time.y * 4)); 
+                
+                //return float4(specularLight , specularExponent); // Dot product between the view vector and reflected light vector
+                return float4(diffuseLight * _Color + specularLight + fresnel , 1); // Compositing
 
 
                 // sample the texture
