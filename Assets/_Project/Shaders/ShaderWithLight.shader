@@ -56,7 +56,7 @@ Shader "Unlit/ShaderWithLight"
                 float3 L = _WorldSpaceLightPos0.xyz; // a direction
                 float3 lambert = saturate(dot( N,L ));
                 //float diffuseLight = saturate(dot(N,L)); // Lambertian light equation
-                float diffuseLight = lambert * _LightColor0.xyz;  
+                float3 diffuseLight = lambert * _LightColor0.xyz;  
                 //return float4(diffuseLight.xxx ,1);
 
                 // Specular lighting
@@ -71,8 +71,8 @@ Shader "Unlit/ShaderWithLight"
                 specularLight *= _LightColor0.xyz;
 
                 //Fresnel effect 
-                //float fresnel = 1 - dot(V,N); // Glowing effect
-                float fresnel = (1 - dot(V,N)) * (cos(_Time.y * 4)); 
+                // float fresnel = step(0.5 , 1 - dot(V,N)); // Glowing effect
+                 float fresnel = (1 - dot(V,N)) * (cos(_Time.y * 4));
                 
                 //return float4(specularLight , specularExponent); // Dot product between the view vector and reflected light vector
                 return float4(diffuseLight * _Color + specularLight + fresnel , 1); // Compositing
