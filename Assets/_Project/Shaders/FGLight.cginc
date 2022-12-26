@@ -27,11 +27,13 @@ struct Interpolators
 sampler2D _RockAlbedo;
 sampler2D _RockNormals;
 sampler2D _RockHeight;
+sampler2D _DiffuseIBl;
 float4 _RockAlbedo_ST;
 float _Gloss;
 float4 _Color;
 float _NormalIntensity;
 float _HeightStrenght;
+float4 _AmbientLight;
 
 Interpolators vert (MeshData v)
 {
@@ -82,7 +84,11 @@ float4 frag (Interpolators i) : SV_Target
     float attenuation = LIGHT_ATTENUATION(i); // Will read from the interpolator light coord
     
     float3 lambert = saturate(dot( N,L ));
-    float3 diffuseLight = (lambert * attenuation) * _LightColor0.xyz;  
+    float3 diffuseLight = (lambert * attenuation) * _LightColor0.xyz;
+
+    #ifdef IS_IN_BASE_PASS
+            diffuseLight += _AmbientLight;
+    #endif
 
     // Specular lighting
     float3 V = normalize(_WorldSpaceCameraPos - i.wPos);

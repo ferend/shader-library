@@ -22,10 +22,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _ColorEnd: 0
+    - _ColorEnd: 0.438
     - _ColorStart: 1
     - _Offset: 0
     - _Scale: 1
+    - _WaveAmp: 0.1
     m_Colors:
     - _ColorA: {r: 1, g: 1, b: 1, a: 1}
     - _ColorB: {r: 1, g: 1, b: 1, a: 1}

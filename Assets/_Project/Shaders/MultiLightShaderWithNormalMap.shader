@@ -6,10 +6,13 @@ Shader "Unlit/ShaderWithMultiLightAndNormal"
         _RockAlbedo ("RockAlbedo", 2D) = "white" {}
         [NoScaleOffset] _RockNormals ("Rock Normals", 2D) = "bump" {}
         [NoScaleOffset] _RockHeight ("Rock Height", 2D) = "gray" {}
+        DiffuseIBL ("Diffuse IBL", 2D) = "black" {}
         _Gloss("Gloss",Range(0,1)) = 1
         _Color("Color", Color) = (1,1,1,1)
         _NormalIntensity("Normal Intensity", Range(0,1)) = 1
         _HeightStrenght("Height Strenght", Range(0,0.4)) = 0
+        _AmbientLight("Ambient Light", Color ) = (0,0,0,0)
+        
     }
     SubShader
     {
