@@ -3,6 +3,7 @@
 #include "AutoLight.cginc"
 
 #define USE_LIGHT
+#define IS_IN_BASE_PASS
 
 struct MeshData
 {
@@ -24,16 +25,27 @@ struct Interpolators
     LIGHTING_COORDS(5,6) // Unity Macro for light interp
 };
 
+#define TAU 6.28318530718
+
 sampler2D _RockAlbedo;
 sampler2D _RockNormals;
 sampler2D _RockHeight;
 sampler2D _DiffuseIBl;
+sampler2D _SpecularIBl;
 float4 _RockAlbedo_ST;
 float _Gloss;
 float4 _Color;
 float _NormalIntensity;
 float _HeightStrenght;
 float4 _AmbientLight;
+
+
+float2 DirToRectilinear(float3 dir )
+{
+    float x = atan2(dir.z,dir.x) / TAU + 0.5 ; // Direction we are looking from top down pers.
+    float y = dir.y * 0.5 + 0.5;
+    return float2(x,y);
+}
 
 Interpolators vert (MeshData v)
 {
@@ -59,6 +71,7 @@ Interpolators vert (MeshData v)
 
 float4 frag (Interpolators i) : SV_Target
 {
+    
     float3 rock = tex2D(_RockAlbedo, i.uv );
     float3 surfaceColor = rock * _Color.rgb; // replace this with wherever you write color before, to sample it with texture
     float3 tangentSpaceNormal = UnpackNormal(tex2D(_RockNormals,i.uv));
@@ -87,7 +100,8 @@ float4 frag (Interpolators i) : SV_Target
     float3 diffuseLight = (lambert * attenuation) * _LightColor0.xyz;
 
     #ifdef IS_IN_BASE_PASS
-            diffuseLight += _AmbientLight;
+        float3 diffuseIBL = tex2Dlod(_DiffuseIBl, float4(DirToRectilinear(N),0,0) ).xyz;
+        diffuseLight += diffuseIBL;
     #endif
 
     // Specular lighting
@@ -102,6 +116,12 @@ float4 frag (Interpolators i) : SV_Target
                 
     return float4(diffuseLight * surfaceColor  + specularLight, 1); // Dot product between the view vector and reflected light vector
 
+    #else
+        #ifdef IS_IN_BASE_PASS
+            return surfaceColor;
+        #else
+            return 0;
+        #endif
     #endif
 
 
