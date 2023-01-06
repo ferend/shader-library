@@ -55,6 +55,7 @@ Shader "Unlit/ProceduralSkybox"
         _CloudColorNightEdge("Clouds Edge Night", Color) = (0,1,1,1)
         _CloudColorNightMain("Clouds Main Night", Color) = (0,0.2,0.8,1)
         _CloudColorNightUnder("Clouds Under Night", Color) = (0,0.2,0.6,1)	}
+	
 	SubShader
 	{
 		Tags { "RenderType"="Opaque" }
