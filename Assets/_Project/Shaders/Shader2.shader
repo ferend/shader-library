@@ -78,7 +78,6 @@
                 return (v-a)/(b-a);
             }
 
-
             float CosWave(float2 uv)
             {
 

@@ -22,7 +22,7 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _ColorEnd: 0.438
+    - _ColorEnd: 0.68
     - _ColorStart: 1
     - _Offset: 0
     - _Scale: 1
