@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 391164830}
   - component: {fileID: 391164829}
   m_Layer: 0
-  m_Name: Sphere (6)
+  m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -541,7 +541,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 1, a: 1}
   m_Intensity: 1.04
   m_Range: 3.1070402
   m_SpotAngle: 30
@@ -1245,7 +1245,7 @@ GameObject:
   - component: {fileID: 1579656908}
   - component: {fileID: 1579656907}
   m_Layer: 0
-  m_Name: Quad (2)
+  m_Name: MultiLightPlane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
