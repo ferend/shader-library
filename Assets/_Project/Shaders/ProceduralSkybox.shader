@@ -1,5 +1,6 @@
 Shader "Unlit/ProceduralSkybox"
 {
+	//! CHANGE COLOR SPACE TO LINEAR IT IS VERY BRIGHT IN GAMMA
 	Properties
 	{
 		[Header(Stars Settings)]
@@ -11,22 +12,22 @@ Shader "Unlit/ProceduralSkybox"
 		[Header(Horizon Settings)]
         _OffsetHorizon("Horizon Offset",  Range(-1, 1)) = 0.146
         _HorizonIntensity("Horizon Intensity",  Range(0, 10)) = 5.44
-        _SunSet("Sunset/Rise Color", Color) = (1,0.8,1,1)
-        _HorizonColorDay("Day Horizon Color", Color) = (0,0.8,1,1)
-        _HorizonColorNight("Night Horizon Color", Color) = (0,0.8,1,1)
+        _SunSet("Sunset/Rise Color", Color) = (180,0.7,0,1)
+        _HorizonColorDay("Day Horizon Color", Color) = (181,138,0,1)
+        _HorizonColorNight("Night Horizon Color", Color) = (0,.26,146,1)
 
          [Header(Sun Settings)]
          _SunColor("Sun Color", Color) = (1,1,1,1)
         _SunRadius("Sun Radius",  Range(0, 2)) = 0.1
 
         [Header(Moon Settings)]
-        _MoonColor("Moon Color", Color) = (1,1,1,1)
+        _MoonColor("Moon Color", Color) = (255,250,2.27,1) 
         _MoonRadius("Moon Radius",  Range(0, 2)) = 0.15
         _MoonOffset("Moon Crescent",  Range(-1, 1)) = -0.1
 
         [Header(Day Sky Settings)]
-        _DayTopColor("Day Sky Color Top", Color) = (0.4,1,1,1)
-        _DayBottomColor("Day Sky Color Bottom", Color) = (0,0.8,1,1)
+        _DayTopColor("Day Sky Color Top", Color) = (0.5,0.6,1,1)
+        _DayBottomColor("Day Sky Color Bottom", Color) = (0.23,0.72,0.56,1)
 		
         [Header(Main Cloud Settings)]
         _BaseNoise("Base Noise", 2D) = "black" {}

@@ -25,7 +25,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NoiseTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: f46c641e108b2450e88a5de19e055b5b, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Ramp:
@@ -38,10 +38,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DisAmount: 0.084
-    - _DisLineWidth: 0.019
-    - _NScale: 7.49
-    - _Radius: 9.147905
+    - _DisAmount: 0.01
+    - _DisLineWidth: 0.005
+    - _NScale: 0.1
+    - _Radius: 2.63
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}
