@@ -46,7 +46,7 @@ float _Displacement;
 void vert(inout appdata_full v, out Input o)
 {
 	float3 worldpos = mul(unity_ObjectToWorld,v.vertex).xyz; // The mask texture can also be projected in world space. Instead of v.texcoord, use the world position:
-	half4 disp = tex2Dlod(_DispTex,float4(worldpos.x,worldpos.y + _Time.y,0,0)); // Also can add (*) _Time.
+	half4 disp = tex2Dlod(_DispTex,float4(0,worldpos.x + _Time.y,worldpos.y,0)); // Also can add (*) _Time. // QUIZ: make it vertical not horizontal
 	//half4 disp = tex2Dlod(_DispTex,v.texcoord); //Reading a texture is very similar to the way it's done in the surface shader.  Only instead of "tex2D" we need "tex2Dlod" and instead of "IN.uv_tex" it's "v.texcoord
 	UNITY_INITIALIZE_OUTPUT(Input, o);
 	//v.vertex.xyz += _Displacement; //As you can see the whole mesh moves up at an angle, local to the object.
