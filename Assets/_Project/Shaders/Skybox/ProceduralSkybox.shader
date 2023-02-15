@@ -1,4 +1,4 @@
-Shader "Unlit/ProceduralSkybox"
+Shader "Skybox/ProceduralSkybox"
 {
 	//! CHANGE COLOR SPACE TO LINEAR IT IS VERY BRIGHT IN GAMMA
 	Properties
