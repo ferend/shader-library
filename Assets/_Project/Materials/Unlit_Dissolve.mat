@@ -41,7 +41,7 @@ Material:
     - _DisAmount: 0.01
     - _DisLineWidth: 0.005
     - _NScale: 0.1
-    - _Radius: 2.63
+    - _Radius: 9.558446
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Color2: {r: 1, g: 1, b: 1, a: 1}
