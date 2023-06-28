@@ -42,3 +42,4 @@ Assets/StreamingAssets/crashlytics-build.properties
 
 *.log
 
+.idea/.idea.shader-library/.idea
